@@ -2,9 +2,11 @@
 CHANGES
 =======
 
-3.5.2 (unreleased)
+3.6.0 (unreleased)
 ------------------
 
+- Add support for sorting, reversing and limiting result set,
+  using new zope.index IIndexSort features.
 - Remove testing dependencies from install_requires.
 
 3.5.1 (2007-10-31)
