@@ -18,9 +18,10 @@ $Id$
 
 __docformat__ = "reStructuredText"
 
-import os
-from zope.app.testing.functional import ZCMLLayer
+from zope.app.wsgi.testlayer import BrowserLayer
 
-AppCatalogLayer = ZCMLLayer(
-    os.path.join(os.path.split(__file__)[0], 'ftesting.zcml'),
-    __name__, 'AppCatalogLayer', allow_teardown=True)
+import zope.app.catalog
+
+AppCatalogLayer = BrowserLayer(
+    zope.app.catalog,
+    allowTearDown=True)

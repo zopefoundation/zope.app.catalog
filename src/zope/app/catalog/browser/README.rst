@@ -16,47 +16,47 @@ TODO: Filters
 Catalogs use a unique-id tool to assign short (integer) ids to
 objects.  Before creating a catalog, you must create a intid tool:
 
-  >>> print http(r"""
+  >>> print(http(r"""
   ... POST /++etc++site/default/@@+/action.html HTTP/1.1
   ... Authorization: Basic bWdyOm1ncnB3
   ... Content-Length: 78
   ... Content-Type: application/x-www-form-urlencoded
   ... Referer: http://localhost:8081/++etc++site/default/@@+
-  ... 
+  ...
   ... type_name=BrowserAdd__zope.intid.IntIds&id=&add=+Add+""",
-  ... handle_errors=False)
+  ... handle_errors=False))
   HTTP/1.1 303 ...
 
 And register it:
 
-  >>> print http(r"""
+  >>> print(http(r"""
   ... POST /++etc++site/default/IntIds/addRegistration.html HTTP/1.1
   ... Authorization: Basic mgr:mgrpw
   ... Referer: http://localhost:8081/++etc++site/default/IntIds/
   ... Content-Type: multipart/form-data; boundary=----------CedQTrEQIEPbgfYhvcITAhQi2aJdgu3tYfJ0WYQmkpLQTt6OTOpd5GJ
-  ... 
+  ...
   ... ------------CedQTrEQIEPbgfYhvcITAhQi2aJdgu3tYfJ0WYQmkpLQTt6OTOpd5GJ
   ... Content-Disposition: form-data; name="field.name"
-  ... 
-  ... 
+  ...
+  ...
   ... ------------CedQTrEQIEPbgfYhvcITAhQi2aJdgu3tYfJ0WYQmkpLQTt6OTOpd5GJ
   ... Content-Disposition: form-data; name="field.provided"
-  ... 
+  ...
   ... zope.intid.interfaces.IIntIds
   ... ------------CedQTrEQIEPbgfYhvcITAhQi2aJdgu3tYfJ0WYQmkpLQTt6OTOpd5GJ
   ... Content-Disposition: form-data; name="field.provided-empty-marker"
-  ... 
+  ...
   ... 1
   ... ------------CedQTrEQIEPbgfYhvcITAhQi2aJdgu3tYfJ0WYQmkpLQTt6OTOpd5GJ
   ... Content-Disposition: form-data; name="field.comment"
-  ... 
-  ... 
+  ...
+  ...
   ... ------------CedQTrEQIEPbgfYhvcITAhQi2aJdgu3tYfJ0WYQmkpLQTt6OTOpd5GJ
   ... Content-Disposition: form-data; name="field.actions.register"
-  ... 
+  ...
   ... Register
   ... ------------CedQTrEQIEPbgfYhvcITAhQi2aJdgu3tYfJ0WYQmkpLQTt6OTOpd5GJ--
-  ... """, handle_errors=False)
+  ... """, handle_errors=False))
   HTTP/1.1 303 ...
   ...
 
@@ -76,49 +76,49 @@ TODO: Filters?
       ordinary and meta content. If we did this, then we'd need to be
       able to select, and, perhaps, alter, the unique-id tool used by
       a catalog.
-   
+
 Once we have a unique-id tool, you can add a catalog:
 
-  >>> print http(r"""
+  >>> print(http(r"""
   ... POST /++etc++site/default/@@+/action.html HTTP/1.1
   ... Authorization: Basic bWdyOm1ncnB3
   ... Content-Length: 77
   ... Content-Type: application/x-www-form-urlencoded
   ... Referer: http://localhost:8081/++etc++site/default/@@+
-  ... 
-  ... type_name=BrowserAdd__zope.catalog.catalog.Catalog&id=&add=+Add+""")
+  ...
+  ... type_name=BrowserAdd__zope.catalog.catalog.Catalog&id=&add=+Add+"""))
   HTTP/1.1 303 ...
 
 and register it:
 
-  >>> print http(r"""
+  >>> print(http(r"""
   ... POST /++etc++site/default/Catalog/addRegistration.html HTTP/1.1
   ... Authorization: Basic bWdyOm1ncnB3
   ... Referer: http://localhost:8081/++etc++site/default/Catalog/
   ... Content-Type: multipart/form-data; boundary=----------61t9UJyoacebBevQVdNrlvXP6T9Ik3Xo4RyXkwJJWvuhao65RTuAPRa
-  ... 
+  ...
   ... ------------61t9UJyoacebBevQVdNrlvXP6T9Ik3Xo4RyXkwJJWvuhao65RTuAPRa
   ... Content-Disposition: form-data; name="field.name"
-  ... 
-  ... 
+  ...
+  ...
   ... ------------61t9UJyoacebBevQVdNrlvXP6T9Ik3Xo4RyXkwJJWvuhao65RTuAPRa
   ... Content-Disposition: form-data; name="field.provided"
-  ... 
+  ...
   ... zope.catalog.interfaces.ICatalog
   ... ------------61t9UJyoacebBevQVdNrlvXP6T9Ik3Xo4RyXkwJJWvuhao65RTuAPRa
   ... Content-Disposition: form-data; name="field.provided-empty-marker"
-  ... 
+  ...
   ... 1
   ... ------------61t9UJyoacebBevQVdNrlvXP6T9Ik3Xo4RyXkwJJWvuhao65RTuAPRa
   ... Content-Disposition: form-data; name="field.comment"
-  ... 
-  ... 
+  ...
+  ...
   ... ------------61t9UJyoacebBevQVdNrlvXP6T9Ik3Xo4RyXkwJJWvuhao65RTuAPRa
   ... Content-Disposition: form-data; name="field.actions.register"
-  ... 
+  ...
   ... Register
   ... ------------61t9UJyoacebBevQVdNrlvXP6T9Ik3Xo4RyXkwJJWvuhao65RTuAPRa--
-  ... """)
+  ... """))
   HTTP/1.1 303 ...
 
 
@@ -127,16 +127,16 @@ index, let's add a templated page.  When adding indexes, existing
 objects are indexed, so the document we add now will appear in the
 index:
 
-  >>> print http(r"""
+  >>> print(http(r"""
   ... POST /+/zope.app.zptpage.ZPTPage%3D HTTP/1.1
   ... Authorization: Basic bWdyOm1ncnB3
   ... Content-Length: 780
   ... Content-Type: multipart/form-data; boundary=---------------------------1425445234777458421417366789
   ... Referer: http://localhost:8081/+/zope.app.zptpage.ZPTPage=
-  ... 
+  ...
   ... -----------------------------1425445234777458421417366789
   ... Content-Disposition: form-data; name="field.source"
-  ... 
+  ...
   ... <html>
   ... <body>
   ... Now is the time, for all good dudes to come to the aid of their country.
@@ -144,22 +144,22 @@ index:
   ... </html>
   ... -----------------------------1425445234777458421417366789
   ... Content-Disposition: form-data; name="field.expand.used"
-  ... 
-  ... 
+  ...
+  ...
   ... -----------------------------1425445234777458421417366789
   ... Content-Disposition: form-data; name="field.evaluateInlineCode.used"
-  ... 
-  ... 
+  ...
+  ...
   ... -----------------------------1425445234777458421417366789
   ... Content-Disposition: form-data; name="UPDATE_SUBMIT"
-  ... 
+  ...
   ... Add
   ... -----------------------------1425445234777458421417366789
   ... Content-Disposition: form-data; name="add_input_name"
-  ... 
+  ...
   ... dudes
   ... -----------------------------1425445234777458421417366789--
-  ... """)
+  ... """))
   HTTP/1.1 303 ...
 
 Perhaps the most common type of index to be added is a text index.
@@ -173,53 +173,53 @@ TODO: Simplify the UI for selecting interfaces and attributes
       - If the user selects an interface, we could then provide a
         select list of possible attributes and we could determine the
         callability.  Perhaps selection of an interface should be
-        required. 
+        required.
 
       - An index should have a way to specify default values. In
         particular, text indexes usially use ISearchableText and
-        searchableText. 
+        searchableText.
 
 For text indexes, one generally uses
 `zope.index.text.interfaces.ISearchableText`,
 `getSearchableText` and True.
 
-  >>> print http(r"""
+  >>> print(http(r"""
   ... POST /++etc++site/default/Catalog/+/AddTextIndex%3D HTTP/1.1
   ... Authorization: Basic bWdyOm1ncnB3
   ... Content-Length: 1008
   ... Content-Type: multipart/form-data; boundary=---------------------------12609588153518590761493918424
   ... Referer: http://localhost:8081/++etc++site/default/Catalog/+/AddTextIndex=
-  ... 
+  ...
   ... -----------------------------12609588153518590761493918424
   ... Content-Disposition: form-data; name="field.interface"
-  ... 
+  ...
   ... zope.index.text.interfaces.ISearchableText
   ... -----------------------------12609588153518590761493918424
   ... Content-Disposition: form-data; name="field.interface-empty-marker"
-  ... 
+  ...
   ... 1
   ... -----------------------------12609588153518590761493918424
   ... Content-Disposition: form-data; name="field.field_name"
-  ... 
+  ...
   ... getSearchableText
   ... -----------------------------12609588153518590761493918424
   ... Content-Disposition: form-data; name="field.field_callable.used"
-  ... 
-  ... 
+  ...
+  ...
   ... -----------------------------12609588153518590761493918424
   ... Content-Disposition: form-data; name="field.field_callable"
-  ... 
+  ...
   ... on
   ... -----------------------------12609588153518590761493918424
   ... Content-Disposition: form-data; name="UPDATE_SUBMIT"
-  ... 
+  ...
   ... Add
   ... -----------------------------12609588153518590761493918424
   ... Content-Disposition: form-data; name="add_input_name"
-  ... 
-  ... 
+  ...
+  ...
   ... -----------------------------12609588153518590761493918424--
-  ... """, handle_errors=False)
+  ... """, handle_errors=False))
   HTTP/1.1 303 ...
 
 
@@ -229,11 +229,11 @@ the total word count is 8. The word count is only 8 because ssome stop
 words have been eliminated.
 
 
-  >>> print http(r"""
+  >>> print(http(r"""
   ... GET /++etc++site/default/Catalog/@@advanced.html HTTP/1.1
   ... Authorization: Basic bWdyOm1ncnB3
   ... Referer: http://localhost:8081/++etc++site/default/Catalog/@@contents.html
-  ... """)
+  ... """))
   HTTP/1.1 200 ...
   ...
   <table class="listing" summary="Indexes">
@@ -244,23 +244,35 @@ words have been eliminated.
      <tr>
          <td>TextIndex</td>
          <td>1</td>
-         <td>8</td>
+         <td>10</td>
       </tr>
   </table>
   ...
 
+We can ask the index to reindex the objects:
+
+  >>> print(http(r"""
+  ... POST /++etc++site/default/Catalog/@@reindex.html HTTP/1.1
+  ... Authorization: Basic bWdyOm1ncnB3
+  ... Referer: http://localhost:8081/++etc++site/default/Catalog/@@contents.html
+  ... """))
+  HTTP/1.1 303 ...
+  ...
+  Location: @@advanced.html
+
+
 Now lets add some more pages:
 
-  >>> print http(r"""
+  >>> print(http(r"""
   ... POST /+/zope.app.zptpage.ZPTPage%3D HTTP/1.1
   ... Authorization: Basic bWdyOm1ncnB3
   ... Content-Length: 754
   ... Content-Type: multipart/form-data; boundary=---------------------------1213614620286666602740364725
   ... Referer: http://localhost:8081/+/zope.app.zptpage.ZPTPage=
-  ... 
+  ...
   ... -----------------------------1213614620286666602740364725
   ... Content-Disposition: form-data; name="field.source"
-  ... 
+  ...
   ... <html>
   ... <body>
   ... Dudes, we really need to switch to Zope 3 now.
@@ -268,34 +280,34 @@ Now lets add some more pages:
   ... </html>
   ... -----------------------------1213614620286666602740364725
   ... Content-Disposition: form-data; name="field.expand.used"
-  ... 
-  ... 
+  ...
+  ...
   ... -----------------------------1213614620286666602740364725
   ... Content-Disposition: form-data; name="field.evaluateInlineCode.used"
-  ... 
-  ... 
+  ...
+  ...
   ... -----------------------------1213614620286666602740364725
   ... Content-Disposition: form-data; name="UPDATE_SUBMIT"
-  ... 
+  ...
   ... Add
   ... -----------------------------1213614620286666602740364725
   ... Content-Disposition: form-data; name="add_input_name"
-  ... 
+  ...
   ... zope3
   ... -----------------------------1213614620286666602740364725--
-  ... """)
+  ... """))
   HTTP/1.1 303 ...
 
-  >>> print http(r"""
+  >>> print(http(r"""
   ... POST /+/zope.app.zptpage.ZPTPage%3D HTTP/1.1
   ... Authorization: Basic bWdyOm1ncnB3
   ... Content-Length: 838
   ... Content-Type: multipart/form-data; boundary=---------------------------491825988706308579952614349
   ... Referer: http://localhost:8081/+/zope.app.zptpage.ZPTPage=
-  ... 
+  ...
   ... -----------------------------491825988706308579952614349
   ... Content-Disposition: form-data; name="field.source"
-  ... 
+  ...
   ... <html>
   ... <body>
   ... <p>Writing tests as doctests makes them much more understandable.</p>
@@ -304,32 +316,32 @@ Now lets add some more pages:
   ... </html>
   ... -----------------------------491825988706308579952614349
   ... Content-Disposition: form-data; name="field.expand.used"
-  ... 
-  ... 
+  ...
+  ...
   ... -----------------------------491825988706308579952614349
   ... Content-Disposition: form-data; name="field.evaluateInlineCode.used"
-  ... 
-  ... 
+  ...
+  ...
   ... -----------------------------491825988706308579952614349
   ... Content-Disposition: form-data; name="UPDATE_SUBMIT"
-  ... 
+  ...
   ... Add
   ... -----------------------------491825988706308579952614349
   ... Content-Disposition: form-data; name="add_input_name"
-  ... 
+  ...
   ... doctest
   ... -----------------------------491825988706308579952614349--
-  ... """)
+  ... """))
   HTTP/1.1 303 ...
 
 Now, if we visit the catalog advanced tab, we can see that the 3
 documents have been indexed and that the word count has increased to 30:
 
-  >>> print http(r"""
+  >>> print(http(r"""
   ... GET /++etc++site/default/Catalog/@@advanced.html HTTP/1.1
   ... Authorization: Basic bWdyOm1ncnB3
   ... Referer: http://localhost:8081/++etc++site/default/Catalog/@@contents.html
-  ... """)
+  ... """))
   HTTP/1.1 200 ...
   ...
   <table class="listing" summary="Indexes">
@@ -340,7 +352,7 @@ documents have been indexed and that the word count has increased to 30:
      <tr>
          <td>TextIndex</td>
          <td>3</td>
-         <td>30</td>
+         <td>33</td>
       </tr>
   </table>
   ...
@@ -368,7 +380,7 @@ the word 'now':
 
   >>> results = catalog.searchResults(TextIndex='now')
   >>> [result.__name__ for result in results]
-  [u'dudes', u'zope3']
+  ['dudes', 'zope3']
 
 TODO
    This stuff needs a lot of work.  The indexing interfaces, despite
@@ -379,4 +391,4 @@ TODO
 
 You don't have to use the search algorithm build into the catalog. You
 can implement your own search algorithms and use them with a catalog's
-indexes.   
+indexes.

@@ -2,10 +2,13 @@
 CHANGES
 =======
 
-3.8.2 (unreleased)
+4.0.0 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Add support for Python 3.4, 3.5, 3.6 and PyPy.
+
+- Remove test dependency on ``zope.app.testing`` and
+  ``zope.app.zcmlfiles``, among others.
 
 
 3.8.1 (2010-01-08)
@@ -24,7 +27,7 @@ CHANGES
 
 - Move most of this package's code to new ``zope.catalog`` package,
   leaving only ZMI-related views and backward-compatibility imports
-  here. 
+  here.
 
 3.7.0 (2009-01-31)
 ------------------
@@ -91,4 +94,3 @@ CHANGES
 --------------------
 
 - Added marker interfaces to prevent automatic indexing (see: ``event.txt``)
-

@@ -13,94 +13,84 @@
 ##############################################################################
 """Tests for backward-compatibility imports
 
-$Id: tests.py 95860 2009-02-01 15:55:13Z nadako $
 """
+
+import importlib
 import unittest
-from zope.testing import doctest
 
-def test_imports():
-    '''
-    Here, we test if old import places are still available and we
-    got what we need by importing from them.
-    
-    >>> from zope.app.catalog.attribute import AttributeIndex
-    >>> AttributeIndex
-    <class 'zope.catalog.attribute.AttributeIndex'>
+def _make_import_test(mod_name, attrname):
+    def test(self):
+        mod = importlib.import_module('zope.app.catalog.' + mod_name)
+        self.assertIsNotNone(getattr(mod, attrname, None),
+                             str(mod) + ' has no ' + attrname)
 
-    >>> from zope.app.catalog.catalog import (
-    ...     ResultSet,
-    ...     Catalog,
-    ...     indexAdded,
-    ...     indexDocSubscriber,
-    ...     reindexDocSubscriber,
-    ...     unindexDocSubscriber,
-    ... )
-    >>> ResultSet
-    <class zope.catalog.catalog.ResultSet at 0x...>
-    >>> Catalog
-    <class 'zope.catalog.catalog.Catalog'>
-    >>> indexAdded
-    <function indexAdded at 0x...>
-    >>> indexDocSubscriber
-    <function indexDocSubscriber at 0x...>
-    >>> reindexDocSubscriber
-    <function reindexDocSubscriber at 0x...>
-    >>> unindexDocSubscriber
-    <function unindexDocSubscriber at 0x...>
+    return test
 
-    >>> from zope.app.catalog.field import IFieldIndex, FieldIndex
-    >>> IFieldIndex
-    <InterfaceClass zope.catalog.field.IFieldIndex>
-    >>> FieldIndex
-    <class 'zope.catalog.field.FieldIndex'>
+class TestBWCImports(unittest.TestCase):
 
-    >>> from zope.app.catalog.interfaces import (
-    ...     ICatalogQuery,
-    ...     ICatalogEdit,
-    ...     ICatalogIndex,
-    ...     ICatalog,
-    ...     IAttributeIndex,
-    ...     INoAutoIndex,
-    ...     INoAutoReindex,
-    ... )
-    >>> ICatalogQuery
-    <InterfaceClass zope.catalog.interfaces.ICatalogQuery>
-    >>> ICatalogEdit
-    <InterfaceClass zope.catalog.interfaces.ICatalogEdit>
-    >>> ICatalogIndex
-    <InterfaceClass zope.catalog.interfaces.ICatalogIndex>
-    >>> ICatalog
-    <InterfaceClass zope.catalog.interfaces.ICatalog>
-    >>> IAttributeIndex
-    <InterfaceClass zope.catalog.interfaces.IAttributeIndex>
-    >>> INoAutoIndex
-    <InterfaceClass zope.catalog.interfaces.INoAutoIndex>
-    >>> INoAutoReindex
-    <InterfaceClass zope.catalog.interfaces.INoAutoReindex>
-    
-    >>> from zope.app.catalog.keyword import (
-    ...     IKeywordIndex,
-    ...     KeywordIndex,
-    ...     CaseInsensitiveKeywordIndex,
-    ... )
-    >>> IKeywordIndex
-    <InterfaceClass zope.catalog.keyword.IKeywordIndex>
-    >>> KeywordIndex
-    <class 'zope.catalog.keyword.KeywordIndex'>
-    >>> CaseInsensitiveKeywordIndex
-    <class 'zope.catalog.keyword.CaseInsensitiveKeywordIndex'>
+    for mod_name, attrname in (('attribute', 'AttributeIndex'),
+                               ('catalog', 'ResultSet'),
+                               ('field', 'FieldIndex'),
+                               ('interfaces', 'ICatalog'),
+                               ('keyword', 'KeywordIndex'),
+                               ('text', 'TextIndex')):
+        locals()['test_' + mod_name] = _make_import_test(mod_name, attrname)
 
-    >>> from zope.app.catalog.text import ITextIndex, TextIndex
-    >>> ITextIndex
-    <InterfaceClass zope.catalog.text.ITextIndex>
-    >>> TextIndex
-    <class 'zope.catalog.text.TextIndex'>
-    '''
+
+from zope.container.contained import Contained
+from persistent import Persistent
+from zope.pagetemplate.pagetemplate import PageTemplate
+from zope.interface import implementer
+from zope.index.text.interfaces import ISearchableText
+
+from zope.schema import SourceText
+
+class IZPTPage(ISearchableText):
+    """ZPT Pages are a persistent implementation of Page Templates."""
+
+
+    def setSource(text, content_type='text/html'):
+        """Save the source of the page template.
+
+        'text' must be Unicode.
+        """
+
+    def getSource():
+        """Get the source of the page template."""
+
+    source = SourceText(
+        title=u"Source",
+        description=u"The source of the page template.",
+        required=True)
+
+
+@implementer(IZPTPage)
+class ZPTPage(PageTemplate, Persistent, Contained):
+
+    # See zope.app.zptpage.interfaces.IZPTPage
+    expand = False
+
+    # See zope.app.zptpage.interfaces.IZPTPage
+    evaluateInlineCode = False
+
+    def __getattribute__(self, name):
+
+        return super(ZPTPage, self).__getattribute__(name)
+
+    def getSource(self, request=None):
+        """See zope.app.zptpage.interfaces.IZPTPage"""
+        return self.read(request)
+
+    def setSource(self, text, content_type='text/html'):
+        self.pt_edit(text, content_type)
+
+    # See zope.app.zptpage.interfaces.IZPTPage
+    source = property(getSource, setSource, None,
+                      """Source of the Page Template.""")
+
+    def getSearchableText(self):
+        return self.source
+
 
 def test_suite():
-    suite = unittest.TestSuite()
-    suite.addTest(doctest.DocTestSuite(optionflags=doctest.ELLIPSIS))
-    return suite
-
-if __name__ == "__main__":
-    unittest.main()
+    return unittest.defaultTestLoader.loadTestsFromName(__name__)
