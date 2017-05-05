@@ -54,16 +54,6 @@ def test_suite():
     suite.layer = AppCatalogLayer
     return suite
 
-# XXX: Workaround for https://github.com/zopefoundation/zope.catalog/issues/5
-import zope.schema
-orig_bytesline = zope.schema.BytesLine
-try:
-    zope.schema.BytesLine = zope.schema.NativeStringLine
-    import zope.catalog.text
-    assert hasattr(zope.catalog.text, 'ITextIndex')
-finally:
-    zope.schema.BytesLine = orig_bytesline
-
 
 if __name__ == '__main__':
     unittest.main(defaultTest='test_suite')

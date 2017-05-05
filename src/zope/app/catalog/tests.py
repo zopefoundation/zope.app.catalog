@@ -45,9 +45,9 @@ from zope.index.text.interfaces import ISearchableText
 
 from zope.schema import SourceText
 
+
 class IZPTPage(ISearchableText):
     """ZPT Pages are a persistent implementation of Page Templates."""
-
 
     def setSource(text, content_type='text/html'):
         """Save the source of the page template.
@@ -67,18 +67,7 @@ class IZPTPage(ISearchableText):
 @implementer(IZPTPage)
 class ZPTPage(PageTemplate, Persistent, Contained):
 
-    # See zope.app.zptpage.interfaces.IZPTPage
-    expand = False
-
-    # See zope.app.zptpage.interfaces.IZPTPage
-    evaluateInlineCode = False
-
-    def __getattribute__(self, name):
-
-        return super(ZPTPage, self).__getattribute__(name)
-
     def getSource(self, request=None):
-        """See zope.app.zptpage.interfaces.IZPTPage"""
         return self.read(request)
 
     def setSource(self, text, content_type='text/html'):
