@@ -18,55 +18,85 @@
 ##############################################################################
 """Setup for zope.app.catalog package
 
-$Id$
 """
 import os
 from setuptools import setup, find_packages
 
 def read(*rnames):
-    return open(os.path.join(os.path.dirname(__file__), *rnames)).read()
+    with open(os.path.join(os.path.dirname(__file__), *rnames)) as f:
+        return f.read()
 
-setup(name = 'zope.app.catalog',
-      version = '3.8.2dev',
+tests_require = [
+    'zope.app.appsetup',
+    'zope.app.basicskin >= 4.0.0',
+    'zope.app.container >= 4.0.0',
+    'zope.app.component >= 4.0.0',
+    'zope.app.form >= 5.0.0',
+    'zope.app.publisher',
+    'zope.app.publication',
+    'zope.app.schema >= 4.0.0',
+    'zope.app.wsgi',
+
+    'zope.browserpage',
+    'zope.browserresource',
+    'zope.container',
+    'zope.formlib',
+    'zope.login',
+    'zope.principalannotation',
+    'zope.principalregistry',
+    'zope.publisher',
+    'zope.securitypolicy',
+    'zope.testbrowser >= 5.2',
+    'zope.testing',
+    'zope.testrunner',
+    'zope.traversing >= 4.1.0',
+
+    'webtest',
+]
+
+setup(name='zope.app.catalog',
+      version='4.0.0.dev0',
       author='Zope Corporation and Contributors',
       author_email='zope-dev@zope.org',
       description='Management pages for Zope Catalog',
       long_description=(
-          read('README.txt')
+          read('README.rst')
           + '\n\n' +
-          read('CHANGES.txt')
+          read('CHANGES.rst')
           ),
-      keywords = "zope3 catalog index",
-      classifiers = [
+      keywords="zope3 catalog index",
+      classifiers=[
           'Development Status :: 5 - Production/Stable',
           'Environment :: Web Environment',
           'Intended Audience :: Developers',
           'License :: OSI Approved :: Zope Public License',
           'Programming Language :: Python',
+          'Programming Language :: Python:: 2',
+          'Programming Language :: Python:: 2.7',
+          'Programming Language :: Python:: 3',
+          'Programming Language :: Python:: 3.4',
+          'Programming Language :: Python:: 3.5',
+          'Programming Language :: Python:: 3.6',
+          'Programming Language :: Python :: Implementation :: CPython',
+          'Programming Language :: Python :: Implementation :: PyPy',
           'Natural Language :: English',
           'Operating System :: OS Independent',
           'Topic :: Internet :: WWW/HTTP',
-          'Framework :: Zope3'],
-      url='http://pypi.python.org/pypi/zope.app.catalog',
+          'Framework :: Zope3',
+      ],
+      url='http://github.com/zopefoundation/zope.app.catalog',
       license='ZPL 2.1',
       packages=find_packages('src'),
-      package_dir = {'': 'src'},
+      package_dir={'': 'src'},
       namespace_packages=['zope', 'zope.app'],
-      extras_require = dict(
-          test=['zope.testing',
-                'zope.component',
-                'zope.app.intid',
-                'zope.app.securitypolicy',
-                'zope.app.testing',
-                'zope.app.zcmlfiles',
-                'zope.app.zptpage',
-                'zope.login',
-                'zope.publisher >= 3.12',
-                ]),
-      install_requires = [
+      extras_require={
+          'test': tests_require,
+      },
+      tests_require=tests_require,
+      install_requires=[
           'setuptools',
-          'zope.catalog',
-          ],
-      include_package_data = True,
-      zip_safe = False,
-      )
+          'zope.catalog >= 4.2.0',
+      ],
+      include_package_data=True,
+      zip_safe=False,
+)

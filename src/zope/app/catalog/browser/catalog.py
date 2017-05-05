@@ -13,11 +13,10 @@
 ##############################################################################
 """Catalog Views
 
-$Id$
 """
 from zope.catalog.interfaces import ICatalog
 
-class Advanced:
+class Advanced(object):
     "Provides a user interface for configuring a catalog"
 
     __used_for__ = ICatalog

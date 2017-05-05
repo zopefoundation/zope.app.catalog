@@ -13,16 +13,47 @@
 ##############################################################################
 """Functional tests for zope.app.catalog
 
-$Id$
+
 """
-from zope.app.testing.functional import FunctionalDocFileSuite
+import doctest
+import unittest
+import re
+
+from zope.testing import renormalizing
+
 from zope.app.catalog.testing import AppCatalogLayer
 
+from zope.app.wsgi.testlayer import http as _http
+
+
+def http(query_str, *args, **kwargs):
+    wsgi_app = AppCatalogLayer.make_wsgi_app()
+    # Strip leading \n
+    query_str = query_str.lstrip()
+    kwargs.setdefault('handle_errors', False)
+    if not isinstance(query_str, bytes):
+        query_str = query_str.encode("utf-8")
+    return _http(wsgi_app, query_str, *args, **kwargs)
+
+
+
 def test_suite():
-    suite = FunctionalDocFileSuite('README.txt')
+    checker = renormalizing.RENormalizing((
+        (re.compile("HTTP/1.0"), "HTTP/1.1"),
+        (re.compile(r"u('[^']*')"), r"\1"),
+    ))
+
+    suite = doctest.DocFileSuite(
+        'README.rst',
+        globs={'http': http, 'getRootFolder': AppCatalogLayer.getRootFolder},
+        checker=checker,
+        optionflags=(doctest.ELLIPSIS
+                     | doctest.NORMALIZE_WHITESPACE
+                     | renormalizing.IGNORE_EXCEPTION_MODULE_IN_PYTHON2),
+    )
     suite.layer = AppCatalogLayer
     return suite
 
+
 if __name__ == '__main__':
-    import unittest
     unittest.main(defaultTest='test_suite')
