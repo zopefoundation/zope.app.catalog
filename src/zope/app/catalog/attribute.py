@@ -11,8 +11,5 @@
 # FOR A PARTICULAR PURPOSE.
 #
 ##############################################################################
-"""Index interface-defined attributes
-
-$Id$
-"""
-from zope.catalog.attribute import AttributeIndex # BBB
+"""Index interface-defined attributes."""
+from zope.catalog.attribute import AttributeIndex  # BBB

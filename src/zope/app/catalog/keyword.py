@@ -11,10 +11,7 @@
 # FOR A PARTICULAR PURPOSE.
 #
 ##############################################################################
-"""Keyword catalog index
-
-$Id:$
-"""
+"""Keyword catalog index."""
 
 # BBB
 from zope.catalog.keyword import (

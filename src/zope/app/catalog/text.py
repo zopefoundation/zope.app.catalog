@@ -11,9 +11,6 @@
 # FOR A PARTICULAR PURPOSE.
 #
 ##############################################################################
-"""Text catalog indexes
+"""Text catalog indexes."""
 
-$Id$
-"""
-
-from zope.catalog.text import ITextIndex, TextIndex # BBB
+from zope.catalog.text import ITextIndex, TextIndex  # BBB

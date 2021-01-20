@@ -11,9 +11,6 @@
 # FOR A PARTICULAR PURPOSE.
 #
 ##############################################################################
-"""Field catalog indexes
+"""Field catalog indexes."""
 
-$Id$
-"""
-
-from zope.catalog.field import IFieldIndex, FieldIndex # BBB
+from zope.catalog.field import IFieldIndex, FieldIndex  # BBB

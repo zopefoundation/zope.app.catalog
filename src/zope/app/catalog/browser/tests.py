@@ -13,10 +13,8 @@
 ##############################################################################
 """Functional tests for zope.app.catalog
 
-
 """
 import doctest
-import unittest
 import re
 
 from zope.testing import renormalizing
@@ -36,7 +34,6 @@ def http(query_str, *args, **kwargs):
     return _http(wsgi_app, query_str, *args, **kwargs)
 
 
-
 def test_suite():
     checker = renormalizing.RENormalizing((
         (re.compile("HTTP/1.0"), "HTTP/1.1"),
@@ -53,7 +50,3 @@ def test_suite():
     )
     suite.layer = AppCatalogLayer
     return suite
-
-
-if __name__ == '__main__':
-    unittest.main(defaultTest='test_suite')
