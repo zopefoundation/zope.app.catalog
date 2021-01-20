@@ -1,0 +1,32 @@
+# Generated from:
+# https://github.com/zopefoundation/meta/tree/master/config/pure-python
+[meta]
+template = "pure-python"
+commit-id = "2f8a259d7589d70e4fa73654d5a28f174f0959a0"
+
+[python]
+with-appveyor = false
+with-pypy = true
+with-legacy-python = true
+with-docs = false
+with-sphinx-doctests = false
+
+[coverage]
+fail-under = 98
+
+[manifest]
+additional-rules = [
+    "recursive-include src *.gif",
+    ]
+
+[flake8]
+additional-config = [
+    "# F401 imported but unused",
+    "per-file-ignores =",
+    "    src/zope/app/catalog/attribute.py: F401",
+    "    src/zope/app/catalog/catalog.py: F401",
+    "    src/zope/app/catalog/field.py: F401",
+    "    src/zope/app/catalog/interfaces.py: F401",
+    "    src/zope/app/catalog/keyword.py: F401",
+    "    src/zope/app/catalog/text.py: F401",
+    ]
