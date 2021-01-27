@@ -11,10 +11,7 @@
 # FOR A PARTICULAR PURPOSE.
 #
 ##############################################################################
-"""Catalog Interfaces
-
-$Id$
-"""
+"""Catalog Interfaces."""
 
 # BBB
 from zope.catalog.interfaces import (

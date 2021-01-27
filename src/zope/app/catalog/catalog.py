@@ -11,10 +11,7 @@
 # FOR A PARTICULAR PURPOSE.
 #
 ##############################################################################
-"""Catalog
-
-$Id$
-"""
+"""Catalog."""
 
 # BBB
 from zope.catalog.catalog import (
