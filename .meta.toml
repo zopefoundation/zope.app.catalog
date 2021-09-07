@@ -2,14 +2,14 @@
 # https://github.com/zopefoundation/meta/tree/master/config/pure-python
 [meta]
 template = "pure-python"
-commit-id = "2f8a259d7589d70e4fa73654d5a28f174f0959a0"
+commit-id = "d3627ba9bcb25d0c7cb09b96d695040a20e0ab2b"
 
 [python]
-with-appveyor = false
 with-pypy = true
 with-legacy-python = true
-with-docs = false
 with-sphinx-doctests = false
+with-windows = false
+with-future-python = false
 
 [coverage]
 fail-under = 98
@@ -17,6 +17,9 @@ fail-under = 98
 [manifest]
 additional-rules = [
     "recursive-include src *.gif",
+    "recursive-include src *.pt",
+    "recursive-include src *.rst",
+    "recursive-include src *.zcml",
     ]
 
 [flake8]
@@ -30,3 +33,6 @@ additional-config = [
     "    src/zope/app/catalog/keyword.py: F401",
     "    src/zope/app/catalog/text.py: F401",
     ]
+
+[tox]
+use-flake8 = true
