@@ -5,6 +5,8 @@ CHANGES
 5.0 (unreleased)
 ----------------
 
+- Drop support for PyPy3 because of breaking tests.
+
 - Add support for Python 3.10, 3.11.
 
 - Drop support for Python 2.7, 3.5, 3.6.
