@@ -14,11 +14,9 @@
 """Catalog."""
 
 # BBB
-from zope.catalog.catalog import (
-    ResultSet,
-    Catalog,
-    indexAdded,
-    indexDocSubscriber,
-    reindexDocSubscriber,
-    unindexDocSubscriber,
-)
+from zope.catalog.catalog import Catalog
+from zope.catalog.catalog import ResultSet
+from zope.catalog.catalog import indexAdded
+from zope.catalog.catalog import indexDocSubscriber
+from zope.catalog.catalog import reindexDocSubscriber
+from zope.catalog.catalog import unindexDocSubscriber

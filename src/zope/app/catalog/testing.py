@@ -22,6 +22,7 @@ from zope.app.wsgi.testlayer import BrowserLayer
 
 import zope.app.catalog
 
+
 AppCatalogLayer = BrowserLayer(
     zope.app.catalog,
     allowTearDown=True)
