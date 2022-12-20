@@ -59,8 +59,8 @@ class IZPTPage(ISearchableText):
         """Get the source of the page template."""
 
     source = SourceText(
-        title=u"Source",
-        description=u"The source of the page template.",
+        title="Source",
+        description="The source of the page template.",
         required=True)
 
 
