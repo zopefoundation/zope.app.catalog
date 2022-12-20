@@ -5,7 +5,7 @@ template = "pure-python"
 commit-id = "17011c8b"
 
 [python]
-with-pypy = true
+with-pypy = false
 with-legacy-python = true
 with-sphinx-doctests = false
 with-windows = false
