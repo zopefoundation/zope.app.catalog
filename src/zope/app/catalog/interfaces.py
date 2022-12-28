@@ -14,12 +14,10 @@
 """Catalog Interfaces."""
 
 # BBB
-from zope.catalog.interfaces import (
-    ICatalogQuery,
-    ICatalogEdit,
-    ICatalogIndex,
-    ICatalog,
-    IAttributeIndex,
-    INoAutoIndex,
-    INoAutoReindex,
-)
+from zope.catalog.interfaces import IAttributeIndex
+from zope.catalog.interfaces import ICatalog
+from zope.catalog.interfaces import ICatalogEdit
+from zope.catalog.interfaces import ICatalogIndex
+from zope.catalog.interfaces import ICatalogQuery
+from zope.catalog.interfaces import INoAutoIndex
+from zope.catalog.interfaces import INoAutoReindex

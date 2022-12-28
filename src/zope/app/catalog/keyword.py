@@ -14,8 +14,6 @@
 """Keyword catalog index."""
 
 # BBB
-from zope.catalog.keyword import (
-    IKeywordIndex,
-    KeywordIndex,
-    CaseInsensitiveKeywordIndex
-)
+from zope.catalog.keyword import CaseInsensitiveKeywordIndex
+from zope.catalog.keyword import IKeywordIndex
+from zope.catalog.keyword import KeywordIndex

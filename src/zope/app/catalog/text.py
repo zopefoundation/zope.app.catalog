@@ -13,4 +13,5 @@
 ##############################################################################
 """Text catalog indexes."""
 
-from zope.catalog.text import ITextIndex, TextIndex  # BBB
+from zope.catalog.text import ITextIndex  # BBB
+from zope.catalog.text import TextIndex

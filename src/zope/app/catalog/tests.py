@@ -15,14 +15,15 @@
 
 """
 
-from zope.schema import SourceText
+import importlib
+import unittest
+
+from persistent import Persistent
+from zope.container.contained import Contained
 from zope.index.text.interfaces import ISearchableText
 from zope.interface import implementer
 from zope.pagetemplate.pagetemplate import PageTemplate
-from persistent import Persistent
-from zope.container.contained import Contained
-import importlib
-import unittest
+from zope.schema import SourceText
 
 
 def _make_import_test(mod_name, attrname):
@@ -58,8 +59,8 @@ class IZPTPage(ISearchableText):
         """Get the source of the page template."""
 
     source = SourceText(
-        title=u"Source",
-        description=u"The source of the page template.",
+        title="Source",
+        description="The source of the page template.",
         required=True)
 
 

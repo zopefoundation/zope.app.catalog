@@ -17,7 +17,7 @@
 from zope.catalog.interfaces import ICatalog
 
 
-class Advanced(object):
+class Advanced:
     "Provides a user interface for configuring a catalog"
 
     __used_for__ = ICatalog

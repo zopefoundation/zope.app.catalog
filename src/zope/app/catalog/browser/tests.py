@@ -15,13 +15,10 @@
 
 """
 import doctest
-import re
-
-from zope.testing import renormalizing
-
-from zope.app.catalog.testing import AppCatalogLayer
 
 from zope.app.wsgi.testlayer import http as _http
+
+from zope.app.catalog.testing import AppCatalogLayer
 
 
 def http(query_str, *args, **kwargs):
@@ -35,18 +32,11 @@ def http(query_str, *args, **kwargs):
 
 
 def test_suite():
-    checker = renormalizing.RENormalizing((
-        (re.compile("HTTP/1.0"), "HTTP/1.1"),
-        (re.compile(r"u('[^']*')"), r"\1"),
-    ))
-
     suite = doctest.DocFileSuite(
         'README.rst',
         globs={'http': http, 'getRootFolder': AppCatalogLayer.getRootFolder},
-        checker=checker,
         optionflags=(doctest.ELLIPSIS
-                     | doctest.NORMALIZE_WHITESPACE
-                     | renormalizing.IGNORE_EXCEPTION_MODULE_IN_PYTHON2),
+                     | doctest.NORMALIZE_WHITESPACE),
     )
     suite.layer = AppCatalogLayer
     return suite

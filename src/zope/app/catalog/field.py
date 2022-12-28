@@ -13,4 +13,5 @@
 ##############################################################################
 """Field catalog indexes."""
 
-from zope.catalog.field import IFieldIndex, FieldIndex  # BBB
+from zope.catalog.field import FieldIndex  # BBB
+from zope.catalog.field import IFieldIndex
