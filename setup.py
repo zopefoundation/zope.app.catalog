@@ -39,7 +39,7 @@ tests_require = [
     'zope.app.publisher',
     'zope.app.publication',
     'zope.app.schema >= 4.0.0',
-    'zope.app.wsgi',
+    'zope.app.wsgi[testlayer] >= 5.3',
 
     'zope.browserpage',
     'zope.browserresource',

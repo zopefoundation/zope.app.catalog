@@ -5,7 +5,7 @@ CHANGES
 5.1 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Make tests to be compatible with multipart >= 1.x.
 
 
 5.0 (2024-11-12)

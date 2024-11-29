@@ -16,6 +16,7 @@
 """
 import doctest
 
+from zope.app.wsgi.testlayer import encodeMultipartFormdata
 from zope.app.wsgi.testlayer import http as _http
 
 from zope.app.catalog.testing import AppCatalogLayer
@@ -34,9 +35,12 @@ def http(query_str, *args, **kwargs):
 def test_suite():
     suite = doctest.DocFileSuite(
         'README.rst',
-        globs={'http': http, 'getRootFolder': AppCatalogLayer.getRootFolder},
-        optionflags=(doctest.ELLIPSIS
-                     | doctest.NORMALIZE_WHITESPACE),
+        globs={
+            'http': http,
+            'getRootFolder': AppCatalogLayer.getRootFolder,
+            'encodeMultipartFormdata': encodeMultipartFormdata},
+        optionflags=(
+            doctest.ELLIPSIS | doctest.NORMALIZE_WHITESPACE),
     )
     suite.layer = AppCatalogLayer
     return suite
