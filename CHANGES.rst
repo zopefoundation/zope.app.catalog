@@ -5,6 +5,8 @@ CHANGES
 5.1 (unreleased)
 ----------------
 
+- Drop support for Python 3.8.
+
 - Make tests to be compatible with multipart >= 1.x.
 
 

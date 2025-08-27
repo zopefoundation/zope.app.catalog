@@ -2,7 +2,7 @@
 # https://github.com/zopefoundation/meta/tree/master/config/pure-python
 [meta]
 template = "pure-python"
-commit-id = "f317618e"
+commit-id = "f97912cf"
 
 [python]
 with-pypy = false
@@ -34,6 +34,3 @@ additional-config = [
     "    src/zope/app/catalog/keyword.py: F401",
     "    src/zope/app/catalog/text.py: F401",
     ]
-
-[tox]
-use-flake8 = true
