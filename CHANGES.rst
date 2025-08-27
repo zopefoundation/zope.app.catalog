@@ -5,6 +5,8 @@ CHANGES
 6.0 (unreleased)
 ----------------
 
+- Replace ``pkg_resources`` namespace with PEP 420 native namespace.
+
 - Drop support for Python 3.8.
 
 - Make tests to be compatible with multipart >= 1.x.
