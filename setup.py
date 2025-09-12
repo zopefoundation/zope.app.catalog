@@ -58,7 +58,7 @@ tests_require = [
 ]
 
 setup(name='zope.app.catalog',
-      version='6.0',
+      version='6.1.dev0',
       author='Zope Foundation and Contributors',
       author_email='zope-dev@zope.dev',
       description='Management pages for Zope Catalog',
